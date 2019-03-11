@@ -1,4 +1,3 @@
-package atmproj;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -99,13 +98,13 @@ public class DepositScene {
         backSpace.setLayoutY(numThree.getLayoutY());
         backSpace.setFont(buttonFont);
 
-        Button withdraw = new Button("Deposit");
-        withdraw.setLayoutX(depositField.getLayoutX()+depositField.getMaxWidth()+50);
-        withdraw.setLayoutY(depositField.getLayoutY()-depositField.getMaxHeight()/2);
-        withdraw.setFont(buttonFont);
+        Button deposit = new Button("Deposit");
+        deposit.setLayoutX(depositField.getLayoutX()+depositField.getMaxWidth()+50);
+        deposit.setLayoutY(depositField.getLayoutY()-depositField.getMaxHeight()/2);
+        deposit.setFont(buttonFont);
 
         layout.getChildren().addAll(back,backSpace,clear,depositField,numOne,numTwo,numThree);
-        layout.getChildren().addAll(withdraw,numFour,numFive,numSix);
+        layout.getChildren().addAll(deposit,numFour,numFive,numSix);
         layout.getChildren().addAll(numSeven,numEight,numNine,numZero);
 
 // End of Scene Design -------------------------------------------------------------------------------------------------
@@ -152,12 +151,17 @@ public class DepositScene {
             checkTextFieldLimit(depositField);
         });
         numZero.setOnAction(event -> {
+            if(depositField.getText().isEmpty()){
+                errorAlert.setContentText("Cant enter first number zero");
+                errorAlert.show();
+                return;
+            }
             depositField.setText(depositField.getText()+"0");
             checkTextFieldLimit(depositField);
         });
 // End of Number Buttons -----------------------------------------------------------------------------------------------
-// Withdraw Button -----------------------------------------------------------------------------------------------------
-        withdraw.setOnAction(event -> {
+// Deposit Button -----------------------------------------------------------------------------------------------------
+        deposit.setOnAction(event -> {
             if(depositField.getText().isEmpty()){
                 errorAlert.setContentText("Nothing to deposit");
                 errorAlert.show();
