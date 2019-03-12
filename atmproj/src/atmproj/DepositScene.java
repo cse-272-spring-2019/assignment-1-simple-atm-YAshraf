@@ -1,3 +1,4 @@
+package atmproj;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -151,16 +152,11 @@ public class DepositScene {
             checkTextFieldLimit(depositField);
         });
         numZero.setOnAction(event -> {
-            if(depositField.getText().isEmpty()){
-                errorAlert.setContentText("Cant enter first number zero");
-                errorAlert.show();
-                return;
-            }
             depositField.setText(depositField.getText()+"0");
             checkTextFieldLimit(depositField);
         });
 // End of Number Buttons -----------------------------------------------------------------------------------------------
-// Deposit Button -----------------------------------------------------------------------------------------------------
+// Deposit Button ------------------------------------------------------------------------------------------------------
         deposit.setOnAction(event -> {
             if(depositField.getText().isEmpty()){
                 errorAlert.setContentText("Nothing to deposit");
