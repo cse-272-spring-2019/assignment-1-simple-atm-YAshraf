@@ -1,9 +1,12 @@
 package atmproj;
+
 public class Account {
+	
     private String cardNumber;
     private int balance;
-    private int transactionPos=0;
+    private int transactionPos=-1;
     private int point=0;
+    private int num=0;
     private String transaction[] = {"","","","",""};
 
     Account() {
@@ -25,22 +28,40 @@ public class Account {
     }
 
     public String addTransactionHistory(String operation, String amount) {
+    	
+        if(transactionPos<4) {
+            transaction[++transactionPos] = ((++num) + "- " + operation + " $" + amount);
+            point = transactionPos;
+            }
+        
+        else {
+            for (int k=0;k<4;k++)
+            {
+                transaction[k]=transaction[k+1];
+            }
+            transaction[transactionPos] = ((++num) + "- " + operation + " $" + amount);
+        }
 
-        transactionPos = transactionPos%5;
-        transaction[transactionPos]=((transactionPos+1)+"- "+operation+" $"+amount);
-        point = transactionPos;
-        return transaction[transactionPos++];
+        return transaction[transactionPos];
 
     }
+
     public String nextTransactionHistory() {
-        if(point<4)
-        {
+        if (point < 4) {
             point++;
         }
-        if(transaction[point].equals("")) return transaction[--point];
+        if (transaction[point].equals("")) return transaction[--point];
         return transaction[point];
-
     }
+
+        public String prevTransactionHistory() {
+            if(point>0)
+            {
+                point--;
+            }
+            return transaction[point];
+
+        }
 
     public boolean isValidCard(String card) {
         if (card.equals(cardNumber)) {
@@ -48,14 +69,6 @@ public class Account {
         }
         else return false;
     }
-    public String prevTransactionHistory() {
-        if(point>0)
-        {
-            point--;
-        }
-        return transaction[point];
 
-
-    }
 
 }
